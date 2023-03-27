@@ -56,10 +56,10 @@
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center">
         <li class="page-item">
-          <a href="index.php?page=<?= $previous ?>'" class="page-link">Назад</a>
+          <a href="index.php?page=<?= $previous ?>" class="page-link">Назад</a>
         </li>
         <li class="page-item">
-          <a class="page-link" href="index.php?page=<?= $next ?>'">Вперед</a>
+          <a class="page-link" href="index.php?page=<?= $next ?>">Вперед</a>
         </li>
       </ul>
     </nav>
