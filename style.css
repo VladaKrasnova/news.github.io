@@ -47,8 +47,8 @@ body {
     justify-content: space-between;
 }
 
-.navnews {
-    margin-top: 60px;
+.nav-news {
+    margin: 40px 0;
 }
 
 .page-link {
