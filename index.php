@@ -28,11 +28,9 @@
   $total_rows = mysqli_fetch_array($result)[0];
   $total_pages = ceil($total_rows / $limit);
 
-  $previous = $page - 1;
-  if ($previous < 1) {
-    $previous = 1;
-  }
-  $next = $page + 1;
+  $prev = ($page - 1);
+  $next = ($page + 1);
+  $pagination = '';
 
   $news = mysqli_query($db, "SELECT * FROM `news` ORDER BY idate DESC LIMIT $offset, $limit");
   while ($new = mysqli_fetch_assoc($news)) {
@@ -52,18 +50,29 @@
   <?php
   }
   ?>
-  <div class="navnews">
+    <div class="nav-news">
     <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
-        <li class="page-item">
-          <a href="index.php?page=<?= $previous ?>" class="page-link">Назад</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="index.php?page=<?= $next ?>">Вперед</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
+      <div class="pagination justify-content-center">
+        <?php
+        if ($page > 1) {
+          $pagination .= '<a class="page-link" href="?page=' . $prev . '">Назад</a>';
+        }
+
+        for ($i = max(1, $page - 5); $i <= min($page + 5, $total_pages); $i++) {
+          if (($page) == $i) {
+            $pagination .= '<a class="page-link" href="index.php?page=' . $i . '">' . $i . '</a>';
+          } else {
+            $pagination .= '<a class="page-link" href="index.php?page=' . $i . '">' . $i . '</a>';
+          }
+        }
+        
+        if ($page < $total_pages) {
+          $pagination .= '<a class="page-link" href="?page=' . $next . '">Вперед</a>';
+        }
+
+        echo $pagination;
+        ?>
+
 </body>
 
 </html>
